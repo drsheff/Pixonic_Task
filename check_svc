@@ -1,0 +1,15 @@
+#!/bin/bash
+# Переменная для процесса
+proc=nginx
+
+# grep по процессу и вывод порта
+check_svc=`netstat -tulpn | grep -w $proc | grep -w 'tcp' | awk '{print $4}' | sed -e 's/.*://'`
+
+
+if [ -z "$check_svc"]; then # Если значение пустое
+    echo "Error"
+elif [ "$check_svc" -eq "80" ]; then # Если равно
+    echo "OK"
+elif [ "$check_svc" -ne "80" ]; then # Если не равно
+    echo "Warning"
+fi
