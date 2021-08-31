@@ -1,0 +1,19 @@
+import requests
+import json
+import sys
+
+response = requests.get('https://raw.githubusercontent.com/hitch17/sample-data/master/presidents.json')
+r1 = json.dumps(response.json())
+
+st = sys.argv[1]
+
+j = json.loads(r1)
+for pr in j:
+    if pr['president'] == st:
+        print(
+            "Номер: " + str(pr['number']) + '\n'
+            "Родился: " + str(pr['birth_year']) + '\n'
+            "Умер: " + str(pr['death_year']) + '\n'
+            "Даты правления c " + str(pr['took_office'] + " по " + str(pr['left_office'])) + '\n'
+            "Партия: " + str(pr['party']))
+        break
